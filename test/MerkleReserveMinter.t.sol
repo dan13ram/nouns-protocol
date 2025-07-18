@@ -113,6 +113,10 @@ contract MerkleReserveMinterTest is NounsBuilderTest {
         minter.setMintSettings(address(token), settings);
 
         (uint64 mintStart, uint64 mintEnd, uint64 pricePerToken, bytes32 merkleRoot) = minter.allowedMerkles(address(token));
+        assertEq(mintStart, settings.mintStart);
+        assertEq(mintEnd, settings.mintEnd);
+        assertEq(pricePerToken, settings.pricePerToken);
+        assertEq(merkleRoot, settings.merkleRoot);
 
         TokenTypesV2.MinterParams memory params = TokenTypesV2.MinterParams({ minter: address(minter), allowed: true });
         TokenTypesV2.MinterParams[] memory minters = new TokenTypesV2.MinterParams[](1);
